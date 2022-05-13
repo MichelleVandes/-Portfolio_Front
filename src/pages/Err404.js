@@ -1,4 +1,5 @@
 import React from 'react';
+import Navbar from '../components/Navbar';
 import './Err404.css'
 import Img404 from './img404.jpg'
 
@@ -6,8 +7,9 @@ const Err404 = () => {
 
 
     return (
-        <div>
-       <img className='photo404' src={Img404} alt="" />
+        <div className='err404'>
+       <Navbar/> 
+       <img className='photo' src={Img404} alt="" />
         </div>
     );
 };
