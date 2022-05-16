@@ -1,14 +1,19 @@
 import React from "react";
-import Rooter from "./components/Router"
-import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Me from "./pages/MyData";
+import Err404 from "./pages/Err404";
 
-
-function App() {
+const App = () => {
   return (
-    <div>
-      <Rooter />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/me" element={<Me />}></Route>
+        <Route path="*" element={<Err404 />}></Route>
+      </Routes>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;

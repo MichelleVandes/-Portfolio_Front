@@ -1,19 +1,38 @@
-import React from 'react';
-import './LogiqueModale'
-import { useState, useEffect } from 'react';
-import LogiqueModale from './LogiqueModale';
+import React, { useEffect } from "react";
 
-const Modal = (props) => {
+export default function Modal(props) {
+  function close() {
+    console.log("close");
+    props.modalElement.current.style.display = "none";
+  }
 
-    const {modalIsOpen, toggle} = LogiqueModale
+  function open() {
+    props.modalElement.current.style.display = "block";
+  }
 
+  useEffect(() => (props.buttonIsOpen.onClick = open));
 
-    return (
-      <div>
-        <button onClick={toggle}>X</button>
-        <p>Lorem ipsum dolor sit amet.</p>
-      </div>
-    );
-};
-
-export default Modal;
+  return (
+    <div>
+      <h2>Connexion</h2>
+      <form id="personForm" onSubmit={(e) => props.loginUser(e)}>
+        <p>
+          name
+          <br />
+          <input placeholder="Enter name" name="name" required="required" />
+        </p>
+        <p>
+          password
+          <br />
+          <input type="password" name="password" required="required" />
+        </p>
+        <div id="buttons">
+          <button type="submit">OK</button>
+          <button type="button" onClick={close}>
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+}

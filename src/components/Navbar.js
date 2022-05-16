@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from "react";
-import "./NavBar.css";
+import "../Style/NavBar.css";
 import { AiOutlineBars } from "react-icons/ai";
 
 const Navbar = (props) => {
