@@ -1,0 +1,12 @@
+li {
+    list-style: none;
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+}
+
+
+btn {
+  display: flex;
+  justify-content: end;
+}
