@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+
 
 //import {Navbar, Login, ProjectList} from "../components/index";
 import Navbar from "../components/Navbar";
@@ -31,14 +31,13 @@ const project = [
 const MyData = () => {
   const [myUser, setmyUser] = useState("");
   const [userConnect, setUserConnect] = useState(false);
-  let navigate = useNavigate();
+  const [pjtEnCours, setPjtEnCours] = useState("")
+ 
   let hello;
 
-  const modalElement = useRef(null);
+  const userModal = useRef(null);
   const buttonConnect = useRef();
-
-  console.log("modalElement", modalElement);
-
+  const projectDetail = useRef();
 
   const loginUser = (e) => {
     e.preventDefault();
@@ -50,16 +49,15 @@ const MyData = () => {
   };
 
   const onButtonClick = () => {
-  //  console.log("click", document.getElementById("userModal"));
-    modalElement.current.style.display === "block"
-      ? (modalElement.current.style.display = "none")
-      : (modalElement.current.style.display = "block");
+    userModal.current.style.display === "block"
+      ? (userModal.current.style.display = "none")
+      : (userModal.current.style.display = "block");
   };
 
 // L'utilisateur est connecté, affichage de la liste :
   if (userConnect) {
     hello = "Bienvenue sur votre site " + myUser;
-    modalElement.current.style.display = "none";
+    userModal.current.style.display = "none";
     buttonConnect.current.value = "Déconnexion";
 
 
@@ -67,17 +65,19 @@ const MyData = () => {
     hello = "Veuillez vous connecter pour accéder à cette page";
   }
 
-const handleRedirection = (_id) => {
-    let url = "/" + _id;
-    navigate(url);
-  }
-
 const handleDelete = () => {
     
 }
-const handleDetail = (_id) => {
-    
+const handleDetail = (pjt) => {
+   projectDetail.current.style.display="block" 
+setPjtEnCours(pjt);
+console.log("pjt", pjtEnCours);
 }
+
+
+
+
+/////////////////////////////////////////////////////////
 
   return (
     <div>
@@ -87,7 +87,7 @@ const handleDetail = (_id) => {
         Connexion
       </button>
 
-      <div id="userModal" ref={modalElement}>
+      <div id="userModal" ref={userModal}>
         <Login loginUser={loginUser} />
       </div>
       <h1>Mon tableau de bord</h1>
@@ -102,7 +102,9 @@ const handleDetail = (_id) => {
           />
         ))}
       </ul>
-      <ProjectDetail/>
+      <div id="projectDetail" ref={projectDetail}>
+        <ProjectDetail pjtDetail={pjtEnCours} />
+      </div>
     </div>
   );
 };

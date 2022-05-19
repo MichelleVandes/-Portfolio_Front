@@ -10,7 +10,7 @@ function Todo({ id, details, onCheck, onDelete }) {
     <li className="col-md-4 offset-md-4">
       {details.title}
       <div>
-        <button onClick={() => onCheck(details._id)}>
+        <button onClick={() => onCheck(details)}>
           <CgMoreAlt />
         </button>
 

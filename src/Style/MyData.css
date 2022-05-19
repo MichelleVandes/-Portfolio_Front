@@ -1,5 +1,8 @@
 #userModal {
   display: none;
-  color: blueviolet;
+}
 
+#projectDetail {
+  display: none;
+ 
 }

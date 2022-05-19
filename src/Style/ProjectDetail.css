@@ -1,0 +1,18 @@
+.projectDetail {
+    position: absolute;
+    top: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border-top: black 3px;
+    }
+input.title {
+    width: 30em;
+    margin: 20px;
+}
+.description {
+    width: 100%;
+    min-height: 20rem;
+    height: min-content;
+    margin: 10px;
+}

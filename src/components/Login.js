@@ -1,10 +1,12 @@
+import { useNavigate } from "react-router-dom";
+
 
 export default function Login(props) {
-
-function close() {
-  //retour home
-}
-
+   let navigate = useNavigate();
+  function close() {
+    let url = "/";
+    navigate(url);
+  }
 
   return (
     <div>
