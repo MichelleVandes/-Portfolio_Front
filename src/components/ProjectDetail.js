@@ -42,7 +42,9 @@ const imageChange = (event) => {
   // Validation des données
   const handleSubmit = (event) => {
     event.preventDefaut();
-    props.modifyPjt({ id, newTitle, newDescription, newImageUrl });
+    props.modifyPjt({ id, newTitle, newDescription, newImageUrl })
+    console.log('props :', props);
+    
   };
 
   return (

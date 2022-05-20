@@ -1,11 +1,11 @@
-import React, { useRef, useState } from "react";
-
+import React, { useRef, useState} from "react";
 
 //import {Navbar, Login, ProjectList} from "../components/index";
 import Navbar from "../components/Navbar";
 import Login from "../components/Login";
-import ProjectList from "../components/ProjectList"
-import ProjectDetail from "../components/ProjectDetail"
+import ProjectList from "../components/ProjectList";
+import ProjectDetail from "../components/ProjectDetail";
+import useToken from "../components/useToken";
 import "../Style/MyData.css";
 const project = [
   {
@@ -27,77 +27,70 @@ const project = [
     __v: 0,
   },
 ];
-    
-  ;
+
 
 const MyData = () => {
-  const [myUser, setmyUser] = useState("");
-  const [userConnect, setUserConnect] = useState(false);
-  const [pjtEnCours, setPjtEnCours] = useState("")
- 
+  const [pjtEnCours, setPjtEnCours] = useState("");
+  const {token, setToken} = useToken()
+
   let hello;
 
-  const userModal = useRef(null);
-  const buttonConnect = useRef();
   const projectDetail = useRef();
+  const projectList = useRef();
 
-  const loginUser = (e) => {
-    e.preventDefault();
-    console.log("Connect user :", e.target.userName.value);
-    if ((e.target.name.value === "Vandes")) {
-      setUserConnect(true);
-      setmyUser(e.target.userName.value);
-    }
-  };
-
-  const onButtonClick = () => {
-    userModal.current.style.display === "block"
-      ? (userModal.current.style.display = "none")
-      : (userModal.current.style.display = "block");
-  };
-
-// L'utilisateur est connecté, affichage de la liste :
-  if (userConnect) {
-    hello = "Bienvenue sur votre site " + myUser;
-    userModal.current.style.display = "none";
-    buttonConnect.current.value = "Déconnexion";
-
-
-  } else {
-    hello = "Veuillez vous connecter pour accéder à cette page";
+  if (!token) {
+    return (
+      <>
+        <Navbar />  
+        <Login setToken={setToken} />;
+      </>
+    ); 
   }
 
-const handleDelete = () => {
-    
-}
-const handleDetail = (pjt) => {
-   projectDetail.current.style.display="block" 
-setPjtEnCours(pjt);
-console.log("pjt", pjtEnCours);
-}
+  const handleDetail = (pjt) => {
+    projectDetail.current.style.display = "block";
+    setPjtEnCours(pjt);
+    console.log("pjt", pjtEnCours);
+  };
 
-const handleSubmit = () => {};
+  const handleDelete = () => {};
 
+  const handleSubmit = (data) => {
+    console.log("data :", data);
 
+    const myUrl = "http://localhost:8080/login";
 
+    const myInitPost = {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
 
+    fetch(myUrl, myInitPost)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("App data.user.name :", data.user.name);
 
-/////////////////////////////////////////////////////////
+        //onUser(data.user.name);
+      })
+
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  /////////////////////////////////////////////////////////
 
   return (
     <div>
       <Navbar />
       <p>{hello}</p>
-      <button ref={buttonConnect} type="button" onClick={onButtonClick}>
-        Connexion
-      </button>
 
-      <div id="userModal" ref={userModal}>
-        <Login loginUser={loginUser} />
-      </div>
       <h1>Mon tableau de bord</h1>
       <br />
-      <ul className="app-ul">
+      <ul ref={projectList} className="app-ul">
         {project.map((pjt) => (
           <ProjectList
             key={pjt._id}
@@ -108,7 +101,9 @@ const handleSubmit = () => {};
         ))}
       </ul>
       <div id="projectDetail" ref={projectDetail}>
-        <ProjectDetail pjtDetail={pjtEnCours} handleSubmit={handleSubmit} />
+        {pjtEnCours && (
+          <ProjectDetail pjtDetail={pjtEnCours} handleSubmit={handleSubmit} />
+        )}
       </div>
     </div>
   );

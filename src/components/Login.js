@@ -1,29 +1,51 @@
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import loginUser from "../components/loginUser"
 
+export default function Login({setToken}) {
+ 
+  const [userName, setUserName] = useState();
+  const [password, setPassword] = useState();
+  let navigate = useNavigate();
 
-export default function Login(props) {
-   let navigate = useNavigate();
   function close() {
     let url = "/";
     navigate(url);
   }
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const token = await loginUser({
+      userName,
+      password,
+    });
+    setToken(token);
+  };
+
   return (
     <div>
       <form
         id="userForm"
-        onSubmit={(e) => props.loginUser(e)}
-        className="col-md-3 offset-md-1 shadow"
+        onSubmit={handleSubmit}
+        className="col-md-2 offset-md-1 shadow"
       >
         <p>
           name
-          <br />
-          <input placeholder="Votre nom" name="userName" required="required" />
+          <input
+            placeholder="Votre nom"
+            name="userName"
+            required="required"
+            onChange={(e) => setUserName(e.target.value)}
+          />
         </p>
         <p>
           password
-          <br />
-          <input type="password" name="password" required="required" />
+          <input
+            type="password"
+            name="password"
+            required="required"
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </p>
         <div id="buttons">
           <button type="submit">OK</button>

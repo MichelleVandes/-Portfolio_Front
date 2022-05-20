@@ -3,7 +3,7 @@ import "../Style/ProjectList.css";
 import trash from "../images/trash-outline.svg"
 import {CgMoreAlt}  from "react-icons/cg";
 
-function Todo({ id, details, onCheck, onDelete }) {
+function ProjectList({ id, details, onCheck, onDelete }) {
 
 
   return (
@@ -23,4 +23,4 @@ function Todo({ id, details, onCheck, onDelete }) {
 }
 
 
-export default Todo;
+export default ProjectList;
