@@ -8,23 +8,25 @@ import ProjectList from "../components/ProjectList"
 import ProjectDetail from "../components/ProjectDetail"
 import "../Style/MyData.css";
 const project = [
-  {_id: "6274de7f53ee39169fc20bb3",
+  {
+    _id: "6274de7f53ee39169fc20bb3",
     title: "chouette concept",
     description: "premier projet de groupe 1",
-    imageUrl: "chemin 1",
+    imageUrl: "MichelleV.png",
     createdAt: "2022-05-06T08:38:23.568Z",
     updatedAt: "2022-05-06T09:18:20.486Z",
-    __v: 0},
-    {
+    __v: 0,
+  },
+  {
     _id: "6274df8c8a6562b9dde3dc31",
     title: "test2 title",
     description: "description 1",
-    imageUrl: "chemin 1",
+    imageUrl: "chemin 2",
     createdAt: "2022-05-06T08:42:52.929Z",
     updatedAt: "2022-05-06T08:42:52.929Z",
-    __v: 0
-}
-]
+    __v: 0,
+  },
+];
     
   ;
 
@@ -74,6 +76,9 @@ setPjtEnCours(pjt);
 console.log("pjt", pjtEnCours);
 }
 
+const handleSubmit = () => {};
+
+
 
 
 
@@ -103,7 +108,7 @@ console.log("pjt", pjtEnCours);
         ))}
       </ul>
       <div id="projectDetail" ref={projectDetail}>
-        <ProjectDetail pjtDetail={pjtEnCours} />
+        <ProjectDetail pjtDetail={pjtEnCours} handleSubmit={handleSubmit} />
       </div>
     </div>
   );
