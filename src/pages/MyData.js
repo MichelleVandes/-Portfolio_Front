@@ -1,4 +1,4 @@
-import React, { useRef, useState} from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 //import {Navbar, Login, ProjectList} from "../components/index";
 import Navbar from "../components/Navbar";
@@ -7,44 +7,40 @@ import ProjectList from "../components/ProjectList";
 import ProjectDetail from "../components/ProjectDetail";
 import useToken from "../components/useToken";
 import "../Style/MyData.css";
-const project = [
-  {
-    _id: "6274de7f53ee39169fc20bb3",
-    title: "chouette concept",
-    description: "premier projet de groupe 1",
-    imageUrl: "MichelleV.png",
-    createdAt: "2022-05-06T08:38:23.568Z",
-    updatedAt: "2022-05-06T09:18:20.486Z",
-    __v: 0,
-  },
-  {
-    _id: "6274df8c8a6562b9dde3dc31",
-    title: "test2 title",
-    description: "description 1",
-    imageUrl: "chemin 2",
-    createdAt: "2022-05-06T08:42:52.929Z",
-    updatedAt: "2022-05-06T08:42:52.929Z",
-    __v: 0,
-  },
-];
-
 
 const MyData = () => {
   const [pjtEnCours, setPjtEnCours] = useState("");
-  const {token, setToken} = useToken()
-
-  let hello;
-
+  const [myProjects, setMyProjects] = useState([]);
+  const [forGet, setForGet] = useState(false);
+  const { token, setToken } = useToken("");
   const projectDetail = useRef();
   const projectList = useRef();
+  let hello;
 
+  // Appelé lors du premier affichage et à chaque fois que l'élément "forGet" sera modifié
+  useEffect(() => {
+    console.log("top 1");
+    fetch("http://127.0.0.1:5002/project", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => setMyProjects(data))
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [forGet]);
+
+  // Affichage id Connexion ou récupération liste
   if (!token) {
     return (
       <>
-        <Navbar />  
+        <Navbar />
         <Login setToken={setToken} />;
       </>
-    ); 
+    );
   }
 
   const handleDetail = (pjt) => {
@@ -53,32 +49,12 @@ const MyData = () => {
     console.log("pjt", pjtEnCours);
   };
 
-  const handleDelete = () => {};
+  const handleDelete = () => {
+    setForGet(!forGet);
+  };
 
   const handleSubmit = (data) => {
-    console.log("data :", data);
-
-    const myUrl = "http://localhost:8080/login";
-
-    const myInitPost = {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-
-    fetch(myUrl, myInitPost)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("App data.user.name :", data.user.name);
-
-        //onUser(data.user.name);
-      })
-
-      .catch((error) => {
-        console.error(error);
-      });
+    setForGet(!forGet);
   };
 
   /////////////////////////////////////////////////////////
@@ -91,7 +67,7 @@ const MyData = () => {
       <h1>Mon tableau de bord</h1>
       <br />
       <ul ref={projectList} className="app-ul">
-        {project.map((pjt) => (
+        {myProjects.map((pjt) => (
           <ProjectList
             key={pjt._id}
             details={pjt}

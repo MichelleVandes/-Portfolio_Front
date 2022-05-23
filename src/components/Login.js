@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
-import loginUser from "../components/loginUser"
+import loginUser from "./loginUser"
 
 export default function Login({setToken}) {
  
@@ -19,7 +19,10 @@ export default function Login({setToken}) {
       userName,
       password,
     });
-    setToken(token);
+    if (token !== undefined) {
+       setToken(token);
+    }
+   
   };
 
   return (

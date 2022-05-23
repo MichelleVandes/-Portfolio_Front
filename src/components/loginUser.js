@@ -1,7 +1,3 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-
-
 async function loginUser(dataUser) {
  return fetch('http://localhost:5002/login', {
    method: 'POST',
@@ -11,6 +7,7 @@ async function loginUser(dataUser) {
    body: JSON.stringify(dataUser)
  })
    .then(data => data.json())
+   .catch(error => { alert(error)})
 }
 
 export default loginUser
