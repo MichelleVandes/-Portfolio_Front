@@ -1,12 +1,14 @@
 li {
-    list-style: none;
+  list-style: none;
   display: flex;
   justify-content: space-between;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 
 btn {
   display: flex;
   justify-content: end;
+  width: 15px;
+
 }

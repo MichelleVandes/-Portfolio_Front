@@ -1,7 +1,7 @@
 import React from "react";
 import "../Style/ProjectList.css";
 import trash from "../images/trash-outline.svg"
-import {CgMoreAlt}  from "react-icons/cg";
+import more from "../images/ellipsis-horizontal-sharp.svg";
 
 function ProjectList({ id, details, onCheck, onDelete }) {
 
@@ -11,11 +11,11 @@ function ProjectList({ id, details, onCheck, onDelete }) {
       {details.title}
       <div>
         <button onClick={() => onCheck(details)}>
-          <CgMoreAlt />
+          <img src={more} alt="poubelle" height="20" />
         </button>
 
         <button onClick={() => onDelete(details._id)}>
-          <img src={trash} alt="poubelle" height="15" width="15" />
+          <img src={trash} alt="poubelle" height="20"  />
         </button>
       </div>
     </li>
