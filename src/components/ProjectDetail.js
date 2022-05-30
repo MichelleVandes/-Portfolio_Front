@@ -58,6 +58,9 @@ const ProjectDetail = (props) => {
             defaultValue={myDescription}
           />
         </div>
+        <button className="add-btn" type="submit">
+          Confirmer
+        </button>
         <button className="add-btn">Confirmer</button>
         {/* <input
           {...register("_id")}

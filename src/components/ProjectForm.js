@@ -1,57 +1,57 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-function ProjectForm(props) {
-  
-
-  const { register, handleSubmit, reset } = useForm({
+function ProjectForm({ pjtDetail, pjtUpdate, pjtReturn }) {
+  const { handleSubmit, register } = useForm({
     mode: "onTouched",
   });
-  const myTitle = props.pjtDetail.title;
-  const myDescription = props.pjtDetail.description;
-
+  const myTitle = pjtDetail.title;
+  const myDescription = pjtDetail.description;
+  const myId = pjtDetail._id;
 
   const onSubmit = (data) => {
-    props.modifiePjt(data);
-    reset();
+    console.log(data);
+    pjtUpdate(data);
   };
-    const onLogin = () => {
-    
-    };
- 
+
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <h2 className="text-center">Description du Projet</h2>
         <div className="form-group mb-3">
           <label htmlFor="title">Titre du Projet:</label>
-          <input defaultValue={myTitle} type="text" className="form-control" />
+          <input
+            defaultValue={myTitle}
+            type="text"
+            className="form-control"
+            {...register("title", { required: true, maxLength: 80 })}
+          />
         </div>
         <div className="form-group mb-3">
           <label htmlFor="description">Description:</label>
-          <input type="texte" className="form-control" defaultValue={myDescription} />
+          <textarea
+            type="texte"
+            className="form-control"
+            defaultValue={myDescription}
+            {...register("description")}
+          />
         </div>
-
-        <div className="btn-group d-flex justify-content-md-end mt-5">
-          <button
-            type="button"
-            className="btn btn-danger"
-            onClick={() => reset()}
-          >
-            Annuler
-          </button>
-          <button
-            type="button"
-            className="btn btn-secondary"
-            onClick={() => onLogin()}
-          >
-            Modifier
-          </button>
-        </div>
+        <input
+          {...register("_id")}
+          defaultValue={myId}
+          style={{ display: "none" }}
+        />
+        <button>Valider</button>
+        <button
+          type="button"
+          className="btn-danger"
+          onClick={() => pjtReturn()}
+        >
+          Annuler
+        </button>
       </form>
     </div>
   );
 }
 
 export default ProjectForm;
-
