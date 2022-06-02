@@ -47,8 +47,11 @@ const MyData = () => {
   }
   const initNew = () => {
 
-    handleDetail({ _id: "", title: "", description: "", imageUrl: "" });
+  //   
+  handleDetail({});
   };
+
+
   const handleDetail = (pjt) => {
     projectDetail.current.style.display = "block";
     setPjtDt(true);
