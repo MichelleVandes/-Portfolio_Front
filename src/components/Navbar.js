@@ -29,7 +29,7 @@ const Navbar = (props) => {
   return (
     <nav>
       {toggleMenu && (
-        <ul className="liste">
+        <ul className="liste ">
           <Link className="items" to="/">
             Home
           </Link>

@@ -1,16 +1,19 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import "../Style/Err404.css";
-import Img404 from './img404.jpg'
+//import Img404 from '/img404.jpg'
 
 const Err404 = () => {
 
 
     return (
-        <div className='err404'>
-       <Navbar/> 
-       <img className='photo' src={Img404} alt="" />
+      <div>
+        <Navbar />
+     
+        <div className="err404">
+          <img className="img404" src="/Img404.jpg" alt="" />
         </div>
+      </div>
     );
 };
 

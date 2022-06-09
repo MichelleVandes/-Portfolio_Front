@@ -1,0 +1,9 @@
+.homeImg {
+width: 200px;
+}
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }

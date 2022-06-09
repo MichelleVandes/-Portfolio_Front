@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Me from "./pages/MyData";
 import Cv from "./pages/MyCv"
+import "bootstrap/dist/css/bootstrap.min.css"
 import Err404 from "./pages/Err404";
 
 const App = () => {

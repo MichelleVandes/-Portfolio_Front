@@ -3,7 +3,7 @@ import React, { useRef, useState, useEffect } from "react";
 //import {Navbar, Login, ProjectList} from "../components/index";
 import Navbar from "../components/Navbar";
 import Login from "../components/Login";
-import ProjectList from "../components/ProjectList";
+import ProjectListBack from "../components/ProjectListBack";
 import useToken from "../components/useToken";
 import "../Style/MyData.css";
 import ProjectForm from "../components/ProjectForm";
@@ -75,7 +75,7 @@ const MyData = () => {
       .then((response) => response.json())
       .then((data) => setMyProjects(data))
       .catch((error) => {
-        console.log(error);
+        alert(error);
       });
 
     setForGet(!forGet);
@@ -114,7 +114,7 @@ const MyData = () => {
       })
 
       .catch((error) => {
-        console.log(error);
+        alert(error);
       });
 
     console.log("top4");
@@ -132,7 +132,7 @@ const MyData = () => {
           <button onClick={initNew}>Nouveau Projet</button>
           <ul ref={projectList} className="app-ul">
             {myProjects.map((pjt) => (
-              <ProjectList
+              <ProjectListBack
                 key={pjt._id}
                 details={pjt}
                 onCheck={handleDetail}
