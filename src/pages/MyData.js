@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 
+
 //import {Navbar, Login, ProjectList} from "../components/index";
 import Navbar from "../components/Navbar";
 import Login from "../components/Login";
@@ -16,14 +17,13 @@ const MyData = () => {
   const { token, setToken } = useToken("");
   const projectDetail = useRef();
   const projectList = useRef();
-
-  let myUrl = "http://127.0.0.1:5002/project";
+  
   let fetchMethod = "";
 
   // Appelé lors du premier affichage et à chaque fois que l'élément "forGet" sera modifié
   useEffect(() => {
     console.log("top 1; pjtEnCours :", pjtEnCours);
-    fetch(myUrl, {
+    fetch(`${process.env.REACT_APP_AD_SERVER}/project`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -66,7 +66,7 @@ const MyData = () => {
 
   const handleDelete = (_id) => {
     console.log("pjt enCours ", _id);
-    fetch(myUrl + "/" + _id, {
+    fetch(`${process.env.REACT_APP_AD_SERVER}/project/${_id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -91,10 +91,10 @@ const MyData = () => {
     let fetchUrl = "";
     if (_id) {
       fetchMethod = "PUT";
-      fetchUrl = myUrl + "/" + _id;
+      fetchUrl = `${process.env.REACT_APP_AD_SERVER}/project/${_id}`;
     } else {
       fetchMethod = "POST";
-      fetchUrl = myUrl + "/newPjt";
+      fetchUrl = `${process.env.REACT_APP_AD_SERVER}/project/newPjt` ;
     }
 
     fetch(fetchUrl, {

@@ -4,7 +4,7 @@ import loginUser from "./loginUser"
 
 export default function Login({setToken}) {
  
-  const [userName, setUserName] = useState();
+  const [pseudo, setUserpseudo] = useState();
   const [password, setPassword] = useState();
   let navigate = useNavigate();
 
@@ -14,9 +14,11 @@ export default function Login({setToken}) {
   }
 
   const handleSubmit = async (e) => {
+ 
     e.preventDefault();
+    console.log("top handleSubmit", pseudo, password);
     const token = await loginUser({
-      userName,
+      pseudo,
       password,
     });
     if (token !== undefined) {
@@ -35,15 +37,16 @@ export default function Login({setToken}) {
         <p>
           name
           <input
-            placeholder="Votre nom"
-            name="userName"
+            placeholder="  Pseudo"
+            name="pseudo"
             required="required"
-            onChange={(e) => setUserName(e.target.value)}
+            onChange={(e) => setUserpseudo(e.target.value)}
           />
         </p>
         <p>
           password
           <input
+          placeholder="  Mot de passe"
             type="password"
             name="password"
             required="required"

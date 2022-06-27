@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
+import Footer from "../components/Footer"
 import "../Style/Err404.css";
 //import Img404 from '/img404.jpg'
 
@@ -13,6 +14,7 @@ const Err404 = () => {
         <div className="err404">
           <img className="img404" src="/Img404.jpg" alt="" />
         </div>
+        <Footer/>
       </div>
     );
 };

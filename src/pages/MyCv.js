@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
-import '../Style/MyCv.css'
+//import '../Style/MyCv.css'
 //import Cv from "./Vandescrick_Michelle_CV.jpg";
 
 const MyCv = () => {
